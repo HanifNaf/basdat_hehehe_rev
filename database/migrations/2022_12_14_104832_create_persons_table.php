@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
+            $table->integer('total_price');
             $table->string('person_name');
             $table->integer('age');
             $table->string('gender');
             $table->string('city');
             $table->string('email');
-            $table->foreign('order_id')
-              ->references('id')->on('orderitems')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orderitems')->onDelete('cascade');
         });
     }
 

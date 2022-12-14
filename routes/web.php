@@ -9,6 +9,7 @@ use App\Http\Controllers\PemesananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SandwichController;
 use App\Http\Controllers\SidesController;
+use App\Http\Controllers\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::get('sides', [SidesController::class, "index"]);
 
 // BEVERAGE ROUTE
 Route::get('beverages', [BeverageController::class, "index"]);
+
+// PERSON ROUTE
+Route::get('person', [PersonController::class, 'index']);
 
 // ADD TO CART ROUTE
 Route::post('/add_to_cart', [CartController::class, 'add_to_cart'])->name('add_to_cart');

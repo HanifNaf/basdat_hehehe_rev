@@ -249,7 +249,7 @@ class CartController extends Controller
                 $this->calculateTotalCart($request);
 
             }
-            return redirect('/menu');
+            return redirect('/person');
         } else {
             return redirect('/');
         }
