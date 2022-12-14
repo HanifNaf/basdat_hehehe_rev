@@ -17,11 +17,20 @@ return new class extends Migration
             $table->id();
             $table->integer('order_id');
             $table->string('product_id');
+            $table->integer('product_type_id');
             $table->string('product_name');
             $table->integer('product_price');
             $table->string('product_image');
             $table->integer('product_quantity');
+            $table->string('bread')->nullable();
+            $table->json('size')->nullable();
+            $table->json('extras')->nullable();
+            $table->json('veggies')->nullable();
+            $table->json('sauces')->nullable();
             $table->date('order_date');
+
+            $table->foreign('product_id')->references('product_id')->on('menu');
+
         });
     }
 

@@ -40,7 +40,7 @@
 					</div>
 
 				</div>
-				<button type="button" class="list-group-item btn-outline-success w-full h-full" data-toggle="modal" data-target=".bd-example-modal-lg" data-sandwichid="{{ $sandwich->unique_id }}" data-sandwichname="{{ $sandwich->name }}" data-sandwichprice="{{ $sandwich->price }}" data-sandwichimage="{{ $sandwich->image }}">
+				<button type="button" class="list-group-item btn-outline-success w-full h-full" data-toggle="modal" data-target=".bd-example-modal-lg" data-sandwichid="{{ $sandwich->product_id }}" data-sandwichname="{{ $sandwich->name }}" data-sandwichprice="{{ $sandwich->price }}" data-sandwichimage="{{ $sandwich->image }}">
 					ADD TO CART
 				</button>
 			</div>
@@ -51,7 +51,7 @@
 				<div class="modal-content container">
 					<div>
 						<img src="{{ asset('img/'.$sandwich->image) }}" alt="">
-						<form method="POST" action="{{ url('sandwiches') }}">
+						<form method="POST" action="{{ route('add_to_cart') }}">
 							@csrf
 
 							<hr>
@@ -121,11 +121,6 @@
 											<label for="extra-cheese" class="flex cursor-pointer rounded-lg bg-gray-200 justify-center items-center h-10 w-full peer-checked:bg-[#719a0a] peer-checked:text-white text-[14px] text-sm font-medium text-gray-900">Extra Cheese</label>
 											</label>
 										</li>
-										<li>
-											<input id="no-extras" type="checkbox" value="No Extras" name="extras[]" class="peer opacity-0  h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-											<label for="no-extras" class="flex cursor-pointer rounded-lg bg-gray-200 justify-center items-center h-10 w-full peer-checked:bg-[#719a0a] peer-checked:text-white text-[14px] text-sm font-medium text-gray-900">No Extras</label>
-											</label>
-										</li>
 									</ul>
 								</div>
 							</div>
@@ -173,12 +168,6 @@
 											<label for="white-onions" class="flex cursor-pointer rounded-lg bg-gray-200 justify-center items-center h-10 w-full peer-checked:bg-[#719a0a] peer-checked:text-white text-[14px] text-sm font-medium text-gray-900">White Onions</label>
 											</label>
 										</li>
-										<li>
-											<input id="no-veggies" type="checkbox" value="No Veggies" name="veggies[]" class="peer opacity-0  h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-											<label for="no-veggies" class="flex cursor-pointer rounded-lg bg-gray-200 justify-center items-center h-10 w-full peer-checked:bg-[#719a0a] peer-checked:text-white text-[14px] text-sm font-medium text-gray-900">No Veggies</label>
-											</label>
-										</li>
-
 									</ul>
 								</div>
 							</div>
@@ -228,7 +217,7 @@
 										</li>
 										<li>
 											<input id="hot-chilli" type="checkbox" value="Hot Chilli" name="sauces[]" class="peer opacity-0  h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-											<label for="hot-chilli" class="flex cursor-pointer rounded-lg bg-gray-200 justify-center items-center h-10 w-full peer-checked:bg-white peer-checked:text-white text-[14px] text-sm font-medium text-gray-900">Hot Chilli</label>
+											<label for="hot-chilli" class="flex cursor-pointer rounded-lg bg-gray-200 justify-center items-center h-10 w-full peer-checked:bg-[#719a0a] peer-checked:text-white text-[14px] text-sm font-medium text-gray-900 text-center">Hot Chilli</label>
 											</label>
 										</li>
 
@@ -252,6 +241,7 @@
 							<div class="modal-body-image">
 								<input type="hidden" name="image" id="image" value="" />
 							</div>
+							<input type="hidden" name="product_type_id" value="{{ $sandwich->product_type_id }}" >
 
 							<hr>
 							<button type="submit" class="list-group-item btn-outline-success w-full h-full">
@@ -275,30 +265,6 @@
 							</script>
 						</form>
 						<br>
-						<form>
-							<form method="POST" action="{{ route('add_to_cart') }}">
-								<div class="modal-body-id">
-									<input type="hidden" name="id" id="id" value="" />
-								</div>
-
-								<div class="modal-body-name">
-									<input type="hidden" name="name" id="name" value="" />
-								</div>
-
-								<div class="modal-body-price">
-									<input type="hidden" name="price" id="price" value="" />
-								</div>
-
-								<div class="modal-body-image">
-									<input type="hidden" name="image" id="image" value="" />
-								</div>
-								<button type="submit" class="list-group-item btn-outline-success w-full h-full">
-									ADD TO CART
-								</button>
-							</form>
-
-						</form>
-
 
 
 					</div>

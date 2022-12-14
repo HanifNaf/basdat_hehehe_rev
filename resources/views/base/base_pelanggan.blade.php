@@ -38,14 +38,11 @@
   <div class="navbar navbar-expand-lg bg-light navbar-light">
     <div class="container-fluid">
       <a href="{{url('/')}}" class="navbar-brand">Sub<span>Way </span> Sura<span>baya</span></a>
-
-      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-        <div class="navbar-nav ml-auto">
-          <a href="{{url('/')}}" class="nav-item nav-link active">Home</a>
-          <a href="{{url('/feature')}}" class="nav-item nav-link">Feature</a>
-          <a href="{{url('/menu')}}" class="nav-item nav-link">Order</a>
-          <a href="{{url('/cart')}}" class="nav-item nav-link">Cart</a>
-        </div>
+      <div class="navbar-nav ml-auto">
+        <a href="{{url('/')}}" class="nav-item nav-link active">Home</a>
+        <a href="{{url('/feature')}}" class="nav-item nav-link">Feature</a>
+        <a href="{{url('/menu')}}" class="nav-item nav-link">Order</a>
+        <a href="{{url('/cart')}}" class="nav-item nav-link">Cart</a>
       </div>
     </div>
   </div>
@@ -118,6 +115,8 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <!-- Template Javascript -->
   <script src="js/main.js"></script>
+  <script src="js/bootstrap.js"></script>
+
 </body>
 
 </html>

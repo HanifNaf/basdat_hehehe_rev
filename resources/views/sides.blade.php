@@ -41,7 +41,8 @@
 				</div>
 				<form method="POST" action="{{ route('add_to_cart') }}">
 					@csrf
-					<input type="hidden" name="id" value="{{$side->unique_id}}">
+					<input type="hidden" name="id" value="{{$side->product_id}}">
+					<input type="hidden" name="product_type_id" value="{{ $side->product_type_id }}" >
 					<input type="hidden" name="name" value="{{$side->name}}">
 					<input type="hidden" name="price" value="{{$side->price}}">
 					<input type="hidden" name="image" value="{{$side->image}}">

@@ -155,6 +155,7 @@
         </div>
 
         <form method="POST" action="{{ route('place_order') }}">
+
           @csrf
           <button class="btn btn-primary" style="float:right">
             @if(Session::has('cart'))

@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sides', function (Blueprint $table) {
-            $table->string('unique_id')->primary();
+        Schema::create('menu', function (Blueprint $table) {
+            $table->string('product_id')->primary();
             $table->integer('product_type_id');
             $table->string('name');
             $table->integer('price');
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('image');
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('created_at')->nullable();
+
+
         });
     }
 
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('snack');
+        Schema::dropIfExists('menu');
     }
 };
