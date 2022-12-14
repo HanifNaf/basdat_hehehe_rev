@@ -45,7 +45,11 @@ class CartController extends Controller
                 
                 // extras
                 $extras = $request->input('extras');
-                $price_extras = $price_size + (sizeof($extras)*5000);
+                if (empty($extras)) {
+                    $price_extras = $price_size + (0*5000);
+                }else{
+                    $price_extras = $price_size + (count($extras)*5000);
+                }
 
                 $veggies = $request->input('veggies');
                 $sauces = $request->input('sauces');
@@ -99,7 +103,11 @@ class CartController extends Controller
 
             // Extras
             $extras = $request->input('extras');
-            $price_extras = $price_size + (sizeof($extras)*5000);
+            if (empty($extras)) {
+                $price_extras = $price_size + (0*5000);
+            }else{
+                $price_extras = $price_size + (count($extras)*5000);
+            }
 
             $veggies = $request->input('veggies');
             $sauces = $request->input('sauces');
@@ -233,6 +241,8 @@ class CartController extends Controller
                     'sauces' => $product_sauces,
                     'order_date' => date('Y-m-d')
                 ]);
+                $prod_quantity = DB::table('menu')->where(['product_id' => $cart[$id] ])->value('stock');
+                DB::table('menu')->where(['product_id' => $cart[$id]])->update(['stock' => $prod_quantity - $product_quantity]);
 
                 unset($cart[$id]);
                 $request->session()->put('cart', $cart);
