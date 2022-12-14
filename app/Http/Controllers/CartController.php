@@ -25,6 +25,7 @@ class CartController extends Controller
             $id = $request->input('id');
 
             if (!in_array($id, $products_array_ids)) {
+                $type = $request->input('product_type_id');
                 $name = $request->input('name');
                 $image = $request->input('image');
                 $price = $request->input('price');
@@ -32,12 +33,34 @@ class CartController extends Controller
 
                 $quantity_cart = $quantity + 1;
 
+                // sandwich details
+                $bread = $request->input('bread');
+                $size = $request->input('size');
+
+                if ($size == 'Footlong'){
+                    $price_size = $price * 2;
+                } else{
+                    $price_size = $price;
+                }
+
+                $extras = $request->input('extras');
+                $veggies = $request->input('veggies');
+                $sauces = $request->input('sauces');
+
+
                 $product_array = array(
                     'id' => $id,
+                    'type' => $type,
                     'name' => $name,
                     'image' => $image,
-                    'price' => $price,
+                    'price' => $price_size,
                     'quantity' => $quantity_cart,
+                    'bread' => $bread,
+                    'size' => $size,
+                    'extras' => $extras,
+                    'veggies' => $veggies,
+                    'sauces' => $sauces,
+
                 );
 
                 $cart[$id] = $product_array;
@@ -52,6 +75,8 @@ class CartController extends Controller
             $cart = array();
 
             $id = $request->input('id');
+            $type = $request->input('product_type_id');
+
             $name = $request->input('name');
             $image = $request->input('image');
             $price = $request->input('price');
@@ -59,13 +84,33 @@ class CartController extends Controller
 
             $quantity_cart = $quantity + 1;
 
+            // sandwich details
+            $bread = $request->input('bread');
+            $size = $request->input('size');
+
+            if ($size == 'Footlong'){
+                $price_size = $price * 2;
+            } else{
+                $price_size = $price;
+            }
+
+            $extras = $request->input('extras');
+            $veggies = $request->input('veggies');
+            $sauces = $request->input('sauces');
+
 
             $product_array = array(
                 'id' => $id,
+                'type' => $type,
                 'name' => $name,
                 'image' => $image,
-                'price' => $price,
-                'quantity' => $quantity_cart
+                'price' => $price_size,
+                'quantity' => $quantity_cart,
+                'bread' => $bread,
+                'size' => $size,
+                'extras' => $extras,
+                'veggies' => $veggies,
+                'sauces' => $sauces,
             );
             $cart[$id] = $product_array;
 
@@ -154,23 +199,39 @@ class CartController extends Controller
 
                 $product = $cart[$id];
                 $product_id = $product['id'];
+                $product_type = $product['type'];
                 $product_name = $product['name'];
                 $product_price = $product['price'];
                 $product_quantity = $product['quantity'];
                 $product_image = $product['image'];
 
+                // sandwich details
+                $product_bread = $product['bread'];
+                $product_size = json_encode($product['size']);
+                $product_extras = json_encode($product['extras']);
+                $product_veggies = json_encode($product['veggies']);
+                $product_sauces = json_encode($product['sauces']);
+
                 DB::table('orderitems')->insert([
                     'order_id' => $order_id,
                     'product_id' => $product_id,
+                    'product_type_id' => $product_type,
                     'product_name' => $product_name,
                     'product_price' => $product_price,
                     'product_image' => $product_image,
                     'product_quantity' => $product_quantity,
+                    'bread' => $product_bread,
+                    'size' => $product_size,
+                    'extras' => $product_extras,
+                    'veggies' => $product_veggies,
+                    'sauces' => $product_sauces,
                     'order_date' => date('Y-m-d')
                 ]);
 
                 unset($cart[$id]);
                 $request->session()->put('cart', $cart);
+                $this->calculateTotalCart($request);
+
             }
             return redirect('/menu');
         } else {

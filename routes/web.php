@@ -37,8 +37,6 @@ Route::get('pemesanan', [PemesananController::class, "index"]);
 
 // SANDWICH ROUTE
 Route::get('sandwiches', [SandwichController::class, "index"]);
-Route::post('sandwiches', [SandwichController::class, "store"]);
-// Route::post('sandwiches', [CartController::class, "add_to_cart"]);
 
 // SNACK ROUTE
 Route::get('sides', [SidesController::class, "index"]);

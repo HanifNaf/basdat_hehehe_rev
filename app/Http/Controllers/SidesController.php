@@ -12,7 +12,8 @@ class SidesController extends Controller
     // return HTML
     function index()
     {
-        $sides = DB::table('sides')->get();
+        $sides = DB::select('select * from menu where product_type_id = 3');
+
         return view('sides', ['sides'=>$sides]);
     }
 

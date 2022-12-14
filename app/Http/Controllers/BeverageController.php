@@ -12,7 +12,8 @@ class BeverageController extends Controller
     // return HTML
     function index()
     {
-        $beverages = DB::table('beverage')->get();
+        // $beverages = DB::table('menu')->get();
+        $beverages = DB::select('select * from menu where product_type_id = 2');
         return view('beverage', ['beverages' => $beverages]);
     }
 }
