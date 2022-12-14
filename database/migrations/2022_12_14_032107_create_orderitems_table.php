@@ -23,11 +23,11 @@ return new class extends Migration
             $table->string('product_image');
             $table->integer('product_quantity');
             $table->string('bread')->nullable();
-            $table->json('size')->nullable();
-            $table->json('extras')->nullable();
-            $table->json('veggies')->nullable();
-            $table->json('sauces')->nullable();
-            $table->date('order_date');
+            $table->string('size')->nullable();
+            $table->string('extras')->nullable();
+            $table->string('veggies')->nullable();
+            $table->string('sauces')->nullable();
+            $table->timestamp('created_at');
 
         });
     }

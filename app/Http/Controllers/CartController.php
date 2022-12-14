@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class CartController extends Controller
 {
@@ -221,10 +222,11 @@ class CartController extends Controller
 
                 // sandwich details
                 $product_bread = $product['bread'];
-                $product_size = json_encode($product['size']);
+                $product_size = $product['size'];
                 $product_extras = json_encode($product['extras']);
                 $product_veggies = json_encode($product['veggies']);
                 $product_sauces = json_encode($product['sauces']);
+
 
                 DB::table('orderitems')->insert([
                     'order_id' => $order_id,
@@ -238,8 +240,7 @@ class CartController extends Controller
                     'size' => $product_size,
                     'extras' => $product_extras,
                     'veggies' => $product_veggies,
-                    'sauces' => $product_sauces,
-                    'order_date' => date('Y-m-d')
+                    'sauces' => $product_sauces
                 ]);
                 $prod_quantity = DB::table('menu')->where(['product_id' => $cart[$id] ])->value('stock');
                 DB::table('menu')->where(['product_id' => $cart[$id]])->update(['stock' => $prod_quantity - $product_quantity]);
@@ -249,7 +250,7 @@ class CartController extends Controller
                 $this->calculateTotalCart($request);
 
             }
-            return redirect('/person');
+            return redirect('/payment');
         } else {
             return redirect('/');
         }

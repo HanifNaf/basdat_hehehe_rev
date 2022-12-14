@@ -5,11 +5,12 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderIdController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PemesananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SandwichController;
 use App\Http\Controllers\SidesController;
-use App\Http\Controllers\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,7 @@ Route::get('sides', [SidesController::class, "index"]);
 Route::get('beverages', [BeverageController::class, "index"]);
 
 // PERSON ROUTE
-Route::get('person', [PersonController::class, 'index']);
+Route::get('payment', [PaymentController::class, 'index']);
 
 // ADD TO CART ROUTE
 Route::post('/add_to_cart', [CartController::class, 'add_to_cart'])->name('add_to_cart');

@@ -117,7 +117,7 @@
 											</label>
 										</li>
 										<li>
-											<input id="extra-cheese" type="checkbox" value="Extra Cheese" name="extras[]" class="peer opacity-0  h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+											<input id="extra-cheese" type="checkbox" value="Cheese" name="extras[]" class="peer opacity-0  h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
 											<label for="extra-cheese" class="flex cursor-pointer rounded-lg bg-gray-200 justify-center items-center h-10 w-full peer-checked:bg-[#719a0a] peer-checked:text-white text-[14px] text-sm font-medium text-gray-900">Extra Cheese</label>
 											</label>
 										</li>

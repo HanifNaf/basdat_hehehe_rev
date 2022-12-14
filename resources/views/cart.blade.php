@@ -15,43 +15,18 @@
 <div class="page-header">
   <div class="row">
     <div class="col-12">
-      <h2>Shopppping Cart</h2>
+      <h2>Shopping Cart</h2>
     </div>
   </div>
 </div>
 <!-- Page Header End -->
 
 <div class="container">
-
-  <!--
-      - checkout section
-      -->
-  <section class="checkout w-full">
-    <h2 class="section-heading">Payment Type</h2>
-
-    <div class="payment-form">
-      <div class="payment-method">
-        <p>
-          Jl. Airlangga No.4 - 6, Airlangga, Kec. Gubeng, Kota SBY, Jawa Timur 60115
-        </p>
-      </div>
-    </div>
-
-    <hr />
-  </section>
-
-  <!--
-        - cart section
-      -->
-
-
   <section class="cart grid grid-cols-5">
     <div class="cart-item-box col-span-2">
       <div class="content-center">
         <h2 class="section-heading">Order Summary</h2>
       </div>
-
-
       @if(Session::has('cart'))
 
       @foreach(Session::get('cart') as $product)
