@@ -42,8 +42,11 @@ class CartController extends Controller
                 } else{
                     $price_size = $price;
                 }
-
+                
+                // extras
                 $extras = $request->input('extras');
+                $price_extras = $price_size + (sizeof($extras)*5000);
+
                 $veggies = $request->input('veggies');
                 $sauces = $request->input('sauces');
 
@@ -53,7 +56,7 @@ class CartController extends Controller
                     'type' => $type,
                     'name' => $name,
                     'image' => $image,
-                    'price' => $price_size,
+                    'price' => $price_extras,
                     'quantity' => $quantity_cart,
                     'bread' => $bread,
                     'size' => $size,
@@ -94,7 +97,10 @@ class CartController extends Controller
                 $price_size = $price;
             }
 
+            // Extras
             $extras = $request->input('extras');
+            $price_extras = $price_size + (sizeof($extras)*5000);
+
             $veggies = $request->input('veggies');
             $sauces = $request->input('sauces');
 
@@ -104,7 +110,7 @@ class CartController extends Controller
                 'type' => $type,
                 'name' => $name,
                 'image' => $image,
-                'price' => $price_size,
+                'price' => $price_extras,
                 'quantity' => $quantity_cart,
                 'bread' => $bread,
                 'size' => $size,

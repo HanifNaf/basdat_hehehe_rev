@@ -29,7 +29,7 @@ return new class extends Migration
             $table->json('sauces')->nullable();
             $table->date('order_date');
 
-            // $table->foreign('product_id')->references('product_id')->on('menu');
+            $table->foreign('product_id')->references('product_id')->on('menu');
 
         });
     }
