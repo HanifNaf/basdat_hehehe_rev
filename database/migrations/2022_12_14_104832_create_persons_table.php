@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('gender');
             $table->string('city');
             $table->string('email');
+            $table->timestamp('created_at');
+            
             $table->foreign('order_id')->references('id')->on('orderitems')->onDelete('cascade');
         });
     }
