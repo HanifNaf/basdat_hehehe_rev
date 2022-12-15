@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('veggies')->nullable();
             $table->string('sauces')->nullable();
             $table->timestamp('created_at');
+            $table->foreign('product_id')->references('product_id')->on
+
 
         });
     }

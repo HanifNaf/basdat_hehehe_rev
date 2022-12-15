@@ -48,6 +48,7 @@ Route::get('beverages', [BeverageController::class, "index"]);
 
 // PERSON ROUTE
 Route::get('payment', [PaymentController::class, 'index']);
+Route::post('payment', [PaymentController::class, 'store']);
 
 // ADD TO CART ROUTE
 Route::post('/add_to_cart', [CartController::class, 'add_to_cart'])->name('add_to_cart');

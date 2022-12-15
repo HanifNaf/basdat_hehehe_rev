@@ -15,123 +15,125 @@
 <hr>
 
 <div class="container">
-    <section class="checkout w-full px-28">
-        <div class="content-center flex">
-            <h2 class="section-heading">Payment Type</h2>
-            <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg" data-sandwichid="{{ $orders->product_id }}">
-                <label class="text-gray-600 hover:text-gray-800 flex py-4 ml-4 rounded cursor-pointer bg-gray-200 justify-center items-center h-12 text-lg px-2">Order#{{ $orders->order_id }}</label>
-            </button>
+    <form method="POST" action="/payment">
+        @csrf
+        <section class="checkout w-full px-28">
 
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="my_modal">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content container">
-                        <hr>
-                        <div class="px-14">
-                            <h1>Order Summary #{{$orders->order_id}}</h1>
+            <div class="content-center flex">
+                <h2 class="section-heading">Payment Type</h2>
+                <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg" data-sandwichid="{{ $orders->product_id }}">
+                    <label class="text-gray-600 hover:text-gray-800 flex py-4 ml-4 rounded cursor-pointer bg-gray-200 justify-center items-center h-12 text-lg px-2">Order#{{ $orders->order_id }}</label>
+                </button>
+
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="my_modal">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content container">
+                            <hr>
+                            <div class="px-14">
+                                <h1>Order Summary #{{$orders->order_id}}</h1>
+                            </div>
+                            <hr>
+                            <table class="table-auto">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center text-white">Food Name</th>
+                                        <th class="text-center">Food Name</th>
+                                        <th class="text-center">Description</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center ">Total Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($orderitems as $order)
+                                    <tr>
+                                        <td>
+                                            <div class="flex items-center justify-center">
+                                                <img style="width: 75px; height: 75px" src="{{asset('img/'.$order->product_image)}}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="wrapper col-span-2 flex  items-center justify-center">
+                                                <div class="product-qty">
+                                                    <div><span>{{ $order->product_name }}</span></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="wrapper col-span-2 flex  items-center justify-center">
+                                                <div class="product-qty">
+                                                    <div><span>{{ $order->bread }}</span></div>
+
+                                                    <div><span>{{ $order->size }}</span></div>
+
+                                                    <!-- extras -->
+                                                    @if($order->extras != 'null')
+                                                    <hr>
+
+                                                    @foreach(json_decode($order->extras) as $extra)
+                                                    <div><span>{{ $extra }}</span></div>
+                                                    @endforeach
+                                                    @else
+                                                    <div><span class="text-white">kosong</span></div>
+                                                    @endif
+
+                                                    <!-- veggies -->
+                                                    @if($order->veggies != 'null')
+                                                    <hr>
+
+                                                    @foreach(json_decode($order->veggies) as $veggie)
+                                                    <div><span>{{ $veggie }}</span></div>
+                                                    @endforeach
+
+                                                    @else
+                                                    <div><span class="text-white">kosong</span></div>
+                                                    @endif
+                                                    <!-- sauces -->
+                                                    @if($order->sauces != 'null')
+                                                    <hr>
+
+                                                    @foreach(json_decode($order->sauces) as $sauce)
+                                                    <div><span>{{ $sauce }}</span></div>
+                                                    @endforeach
+                                                    @else
+                                                    <div><span class="text-white">kosong</span></div>
+                                                    @endif
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="flex items-center justify-center">
+                                                <span>{{ $order->product_quantity }}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="wrapper col-span-2 flex items-center justify-center">
+                                                <div class="product-qty ">
+                                                    <div class="price w-full">
+                                                        Rp <span id="price">{{ $order->product_price }}</span></div>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class=" flex wrapper col-span-2  items-center justify-center">
+                                                <div class="product-qty ">
+                                                    <div class="price w-full">
+                                                        Rp <span id="price">{{ $order->product_price * $order->product_quantity }}</span></div>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <hr>
                         </div>
-                        <hr>
-                        <table class="table-auto">
-                            <thead>
-                                <tr>
-                                    <th class="text-center text-white">Food Name</th>
-                                    <th class="text-center">Food Name</th>
-                                    <th class="text-center">Description</th>
-                                    <th class="text-center">Quantity</th>
-                                    <th class="text-center">Price</th>
-                                    <th class="text-center ">Total Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($orderitems as $order)
-                                <tr>
-                                    <td>
-                                        <div class="flex items-center justify-center">
-                                            <img style="width: 75px; height: 75px" src="{{asset('img/'.$order->product_image)}}">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="wrapper col-span-2 flex  items-center justify-center">
-                                            <div class="product-qty">
-                                                <div><span>{{ $order->product_name }}</span></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="wrapper col-span-2 flex  items-center justify-center">
-                                            <div class="product-qty">
-                                                <div><span>{{ $order->bread }}</span></div>
-
-                                                <div><span>{{ $order->size }}</span></div>
-
-                                                <!-- extras -->
-                                                @if($order->extras != 'null')
-                                                <hr>
-
-                                                @foreach(json_decode($order->extras) as $extra)
-                                                <div><span>{{ $extra }}</span></div>
-                                                @endforeach
-                                                @else
-                                                <div><span class="text-white">kosong</span></div>
-                                                @endif
-
-                                                <!-- veggies -->
-                                                @if($order->veggies != 'null')
-                                                <hr>
-
-                                                @foreach(json_decode($order->veggies) as $veggie)
-                                                <div><span>{{ $veggie }}</span></div>
-                                                @endforeach
-
-                                                @else
-                                                <div><span class="text-white">kosong</span></div>
-                                                @endif
-                                                <!-- sauces -->
-                                                @if($order->sauces != 'null')
-                                                <hr>
-
-                                                @foreach(json_decode($order->sauces) as $sauce)
-                                                <div><span>{{ $sauce }}</span></div>
-                                                @endforeach
-                                                @else
-                                                <div><span class="text-white">kosong</span></div>
-                                                @endif
-
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="flex items-center justify-center">
-                                            <span>{{ $order->product_quantity }}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="wrapper col-span-2 flex items-center justify-center">
-                                            <div class="product-qty ">
-                                                <div class="price w-full">
-                                                    Rp <span id="price">{{ $order->product_price }}</span></div>
-
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class=" flex wrapper col-span-2  items-center justify-center">
-                                            <div class="product-qty ">
-                                                <div class="price w-full">
-                                                    Rp <span id="price">{{ $order->product_price * $order->product_quantity }}</span></div>
-
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <hr>
                     </div>
                 </div>
             </div>
-        </div>
-        <form method="POST"  >
             <div class="grid grid-cols-4 gap-6">
                 <div>
                     <input id="cod" type="radio" value="COD" name="payment" class="peer opacity-0  h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
@@ -152,42 +154,49 @@
                 </div>
             </div>
             <hr>
-    </section>
-    <section class="checkout w-full px-28">
-        <div class="content-center">
-            <h2 class="section-heading">Customer Information</h2>
-        </div>
-        <div class="form-group">
-            <label>Name</label>
-            <input name="nama" class="form-control" placeholder="Enter Name">
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input name="email" class="form-control" placeholder="Enter Email">
-        </div>
-        <div class="grid grid-cols-3 gap-6">
-            <div class="form-group">
-                <label>Age</label>
-                <input name="age" type="number" class="form-control" placeholder="Enter Age">
+        </section>
+        <section class="checkout w-full px-28">
+            <div class="content-center">
+                <h2 class="section-heading">Customer Information</h2>
             </div>
             <div class="form-group">
-                <label>Gender</label>
-                <select class="form-control" aria-label="Default select example">
-                    <option selected>Choose Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
+                <label>Name</label>
+                <input name="nama" class="form-control" placeholder="Enter Name">
             </div>
             <div class="form-group">
-                <label>City</label>
-                <input name="email" class="form-control" placeholder="Enter City">
+                <label>Email</label>
+                <input name="email" class="form-control" placeholder="Enter Email">
+            </div>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="form-group">
+                    <label>Age</label>
+                    <input name="age" type="number" class="form-control" placeholder="Enter Age">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select class="form-control" aria-label="Default select example" name="gender">
+                        <option selected>Choose Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input name="city" class="form-control" placeholder="Enter City">
+                </div>
+
             </div>
 
-        </div>
 
-
-        <hr />
-    </section>
+            <hr />
+            <input type="hidden" name="order_id" value="{{ $orders->order_id }}">
+        <input type="hidden" name="total_price" value="{{ $totalprice }}">
+        <!--  -->
+        <button type="submit" class="list-group-item btn-outline-success rounded h-full w-full">
+            SUBMIT
+        </button>
+        </section>
+        
 
     </form>
 

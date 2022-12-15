@@ -15,16 +15,18 @@ return new class extends Migration
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
+            $table->integer('order_id');
             $table->integer('total_price');
+            $table->string('payment_type');
             $table->string('person_name');
             $table->integer('age');
             $table->string('gender');
             $table->string('city');
             $table->string('email');
-            $table->timestamp('created_at');
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
             
-            $table->foreign('order_id')->references('id')->on('orderitems')->onDelete('cascade');
+            // $table->foreign('order_id')->references('order_id')->on('orderitems')->onDelete('cascade');
         });
     }
 
